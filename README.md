@@ -1,3 +1,7 @@
+This simple service will allow registered users to create shortened versions of
+URLs they provide. It will also provide simple analytics by recording how many
+times the shortened URL is used.
+
 ## Start
 
 This service has been dockarised for ease of development and startup.
