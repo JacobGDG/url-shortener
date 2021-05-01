@@ -5,5 +5,9 @@ AllCops:
   UseCache: false
   NewCops: enable
 
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
+
 Style/Documentation:
   Enabled: false
