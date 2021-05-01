@@ -32,4 +32,12 @@ RSpec.describe ShortenedUrl, type: :model do
     it { is_expected.to validate_presence_of :uid }
     it { is_expected.to validate_presence_of :original_url }
   end
+
+  describe '#short_url' do
+    subject { create(:shortened_url, uid: 'abc-123').short_url }
+
+    it 'returns the expected url containing the uid' do
+      expect(subject).to eq('small.url/abc-123')
+    end
+  end
 end
