@@ -1,0 +1,5 @@
+development:
+  SERVICE_URL: "localhost:3000/"
+
+test:
+  SERVICE_URL: "small.url/"

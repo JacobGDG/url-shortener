@@ -5,6 +5,10 @@ class ShortenedUrl < ApplicationRecord
 
   validates :uid, :original_url, presence: true
 
+  def short_url
+    @short_url ||= ENV['SERVICE_URL'] + uid
+  end
+
   private
 
   def init_uid
