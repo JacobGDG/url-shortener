@@ -28,6 +28,10 @@ RSpec.describe ShortenedUrl, type: :model do
     end
   end
 
+  describe 'Associations' do
+    it { is_expected.to belong_to :user }
+  end
+
   describe 'Validations' do
     it { is_expected.to validate_presence_of :uid }
     it { is_expected.to validate_presence_of :original_url }
