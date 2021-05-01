@@ -46,7 +46,7 @@ class ShortenedUrlsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def shortened_url_params
-    params.require(:shortened_url).permit(:uid, :original_url, :redirect_count)
+    params.require(:shortened_url).permit(:original_url)
   end
 
   def redirect_and_increment_counter

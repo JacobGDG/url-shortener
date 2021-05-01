@@ -15,11 +15,16 @@ RSpec.describe 'shortened_urls/new', type: :view do
     render
 
     assert_select 'form[action=?][method=?]', shortened_urls_path, 'post' do
-      assert_select 'input[name=?]', 'shortened_url[uid]'
-
       assert_select 'input[name=?]', 'shortened_url[original_url]'
 
-      assert_select 'input[name=?]', 'shortened_url[redirect_count]'
+      assert_select 'input[name=?]',
+                    'shortened_url[uid]',
+                    false,
+                    'The uid must be auto-generated'
+      assert_select 'input[name=?]',
+                    'shortened_url[redirect_count]',
+                    false,
+                    'The redirect_count must be auto-generated'
     end
   end
 end
