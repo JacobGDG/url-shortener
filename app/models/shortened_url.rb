@@ -8,6 +8,6 @@ class ShortenedUrl < ApplicationRecord
   private
 
   def init_uid
-    self.uid = SecureRandom.base58(6)
+    self.uid ||= SecureRandom.base58(6)
   end
 end
