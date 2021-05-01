@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ShortenedUrlsController < ApplicationController
+  # before_action :authenticate_user!, except: :redirect
+
   def redirect
     @shortened_url = ShortenedUrl.find_by_uid(params[:id])
 
