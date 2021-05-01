@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe ShortenedUrlsController, type: :request do
-  describe '#redirect' do
+RSpec.describe '/:id', type: :request do
+  describe 'shortened_urls#redirect' do
     subject { get shortened_url_redirect_path(id: given_id_param) }
     let(:given_id_param) { 'abc123' }
 
