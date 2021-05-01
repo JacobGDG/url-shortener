@@ -2,21 +2,56 @@
 
 class ShortenedUrlsController < ApplicationController
   def redirect
-    @url = ShortenedUrl.find_by_uid(params[:id])
+    @shortened_url = ShortenedUrl.find_by_uid(params[:id])
 
-    redirect_and_increment_counter and return if url.present?
+    redirect_and_increment_counter and return if shortened_url.present?
 
     render file: "#{Rails.root}/public/404.html",
            status: 404
   end
 
+  # GET /shortened_urls or /shortened_urls.json
+  def index
+    @shortened_urls = ShortenedUrl.all
+  end
+
+  # GET /shortened_urls/1 or /shortened_urls/1.json
+  def show
+    @shortened_url = ShortenedUrl.find(params[:id])
+  end
+
+  # GET /shortened_urls/new
+  def new
+    @shortened_url = ShortenedUrl.new
+  end
+
+  # POST /shortened_urls or /shortened_urls.json
+  def create
+    @shortened_url = ShortenedUrl.new(shortened_url_params)
+
+    respond_to do |format|
+      if shortened_url.save
+        format.html { redirect_to @shortened_url, notice: 'Shortened url was successfully created.' }
+        format.json { render :show, status: :created, location: @shortened_url }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @shortened_url.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
-  attr_reader :url
+  attr_reader :shortened_url
+
+  # Only allow a list of trusted parameters through.
+  def shortened_url_params
+    params.require(:shortened_url).permit(:uid, :original_url, :redirect_count)
+  end
 
   def redirect_and_increment_counter
-    url.update(redirect_count: url.redirect_count + 1)
+    shortened_url.update(redirect_count: shortened_url.redirect_count + 1)
 
-    redirect_to url.original_url, status: 301
+    redirect_to shortened_url.original_url, status: 301
   end
 end
