@@ -20,13 +20,26 @@ RSpec.describe ShortenedUrlsController, type: :request do
         expect(response.status).to eq 301
       end
 
+      it 'increments redirect_count on the related url by 1' do
+        expect do
+          subject
+          related_url.reload
+        end.to change(related_url, :redirect_count)
+          .from(0).to(1)
+      end
+
       context 'other urls present containing only different capitalisation' do
-        before do
-          create(:shortened_url, uid: given_id_param.capitalize)
-        end
+        let!(:similar_url) { create(:shortened_url) }
 
         it 'redirects the request tot he urls original_url' do
           expect(subject).to redirect_to related_url.original_url
+        end
+
+        it 'does not change the similar urls redirect_count' do
+          expect do
+            subject
+            similar_url.reload
+          end.to_not change(related_url, :redirect_count)
         end
       end
     end
