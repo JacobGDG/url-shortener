@@ -8,4 +8,4 @@ bash:
 	- docker-compose exec url-shortener bash
 
 pipeline:
-	- docker-compose exec url-shortener rubocop
+	- docker-compose exec url-shortener rubocop && rspec

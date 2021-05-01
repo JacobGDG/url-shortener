@@ -30,6 +30,8 @@ group :development, :test do
 
   gem 'rubocop', '~> 1.13', require: false
   gem 'rubocop-rails', '~> 2.9', require: false
+
+  gem 'rspec-rails', '~> 5.0.1'
 end
 
 group :development do
