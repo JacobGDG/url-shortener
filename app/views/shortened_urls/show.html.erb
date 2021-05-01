@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Uid:</strong>
+  <%= @shortened_url.uid %>
+</p>
+
+<p>
+  <strong>Original url:</strong>
+  <%= @shortened_url.original_url %>
+</p>
+
+<p>
+  <strong>Redirect count:</strong>
+  <%= @shortened_url.redirect_count %>
+</p>
+
+<%= link_to 'Back', shortened_urls_path %>
