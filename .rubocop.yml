@@ -1,0 +1,9 @@
+AllCops:
+  Exclude:
+    - 'db/schema.rb'
+    - 'db/migrate/*.rb'
+  UseCache: false
+  NewCops: enable
+
+Style/Documentation:
+  Enabled: false
