@@ -3,6 +3,8 @@
 class ShortenedUrl < ApplicationRecord
   after_initialize :init_uid
 
+  belongs_to :user
+
   validates :uid, :original_url, presence: true
 
   def short_url

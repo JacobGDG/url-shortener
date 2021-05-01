@@ -13,6 +13,8 @@ RSpec.describe '/shortened_urls', type: :request do
       }
     end
 
+    before { create(:user) }
+
     context 'with valid parameters' do
       let(:shortened_url_created) { ShortenedUrl.last }
 

@@ -3,6 +3,7 @@
 class ShortenedUrlsController < ApplicationController
   # before_action :authenticate_user!, except: :redirect
 
+  # GET /:id
   def redirect
     @shortened_url = ShortenedUrl.find_by_uid(params[:id])
 
@@ -29,15 +30,15 @@ class ShortenedUrlsController < ApplicationController
 
   # POST /shortened_urls or /shortened_urls.json
   def create
-    @shortened_url = ShortenedUrl.new(shortened_url_params)
+    initialize_shortened_url
 
     respond_to do |format|
       if shortened_url.save
-        format.html { redirect_to @shortened_url, notice: 'Shortened url was successfully created.' }
-        format.json { render :show, status: :created, location: @shortened_url }
+        format.html { redirect_to shortened_url, notice: 'Shortened url was successfully created.' }
+        format.json { render :show, status: :created, location: shortened_url }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @shortened_url.errors, status: :unprocessable_entity }
+        format.json { render json: shortened_url.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -55,5 +56,11 @@ class ShortenedUrlsController < ApplicationController
     shortened_url.update(redirect_count: shortened_url.redirect_count + 1)
 
     redirect_to shortened_url.original_url, status: 301
+  end
+
+  def initialize_shortened_url
+    @shortened_url = ShortenedUrl.new(
+      shortened_url_params.merge(user: User.first)
+    )
   end
 end
