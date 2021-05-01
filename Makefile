@@ -1,11 +1,14 @@
+APP_POD ?= url-shortener
+
 start:
-	- docker-compose up -d
+	docker-compose up -d
 
 setup:
-	- docker-compose run url-shortener rake db:create
+	docker-compose exec ${APP_POD} bash -c \
+		'RAILS_ENV=development rails db:reset db:environment:set'
 
 bash:
-	- docker-compose exec url-shortener bash
+	docker-compose exec ${APP_POD} bash
 
 pipeline:
-	- docker-compose exec url-shortener rubocop && rspec
+	docker-compose exec ${APP_POD} bash -c 'rubocop && rspec'
