@@ -21,3 +21,7 @@ $ make setup
 ```
 
 4. Go to http://localhost:3000/
+
+5. Either register or use seeded accounts with 
+  * Email: `user-1@mail.com` - `user-5@mail.com`
+  * Password: `password`
