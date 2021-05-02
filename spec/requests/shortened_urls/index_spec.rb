@@ -5,7 +5,6 @@ require 'rails_helper'
 RSpec.describe '/shortened_urls', type: :request do
   describe 'GET /index' do
     subject { get shortened_urls_url }
-    before { create_list(:shortened_url, 5) }
 
     include_examples 'user not signed in so redirect'
 
