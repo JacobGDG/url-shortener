@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ShortenedUrlsController < ApplicationController
-  # before_action :authenticate_user!, except: :redirect
+  before_action :authenticate_user!, except: :redirect
 
   # GET /:id
   def redirect
