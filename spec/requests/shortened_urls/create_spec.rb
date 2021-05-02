@@ -35,11 +35,12 @@ RSpec.describe '/shortened_urls', type: :request do
           )
         end
 
-        it 'sets the expected shortened_url attributes' do
+        it 'sets the expected shortened_url attributes and owned by the user' do
           subject
 
           expect(shortened_url_created.original_url).to eq 'https://example.com'
           expect(shortened_url_created.redirect_count).to eq 0
+          expect(shortened_url_created.user).to eq user
         end
 
         context 'with uid and redirect_count given' do
