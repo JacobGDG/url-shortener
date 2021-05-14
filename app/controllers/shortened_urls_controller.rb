@@ -51,7 +51,6 @@ class ShortenedUrlsController < ApplicationController
   end
 
   def redirect_and_increment_counter
-    shortened_url.update(redirect_count: shortened_url.redirect_count + 1)
     shortened_url.redirects.create!
 
     redirect_to shortened_url.original_url, status: 301

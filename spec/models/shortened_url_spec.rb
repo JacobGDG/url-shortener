@@ -92,4 +92,18 @@ RSpec.describe ShortenedUrl, type: :model do
       expect(subject).to eq('small.url/abc-123')
     end
   end
+
+  describe '#redirect_count' do
+    subject { shortened_url.redirect_count }
+
+    before do
+      create_list(:redirect, 5, shortened_url: shortened_url)
+    end
+
+    let(:shortened_url) { create :shortened_url }
+
+    it 'returns the total number of redirects attributed to the url' do
+      expect(subject).to eq 5
+    end
+  end
 end
