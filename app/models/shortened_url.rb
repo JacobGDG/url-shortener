@@ -17,6 +17,10 @@ class ShortenedUrl < ApplicationRecord
     @short_url ||= ENV['SERVICE_URL'] + uid
   end
 
+  def redirect_count
+    redirects.size
+  end
+
   private
 
   def init_uid
