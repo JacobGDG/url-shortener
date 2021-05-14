@@ -33,6 +33,11 @@ RSpec.describe '/:id', type: :request do
             .from(0).to(1)
         end
 
+        it 'creates a redirect object related to given shortened_url' do
+          expect { subject }.to change(Redirect, :count).from(0).to(1)
+          expect(Redirect.last.shortened_url).to eq(related_url)
+        end
+
         context 'other urls present containing only different capitalisation' do
           let!(:similar_url) { create(:shortened_url) }
 
@@ -45,6 +50,10 @@ RSpec.describe '/:id', type: :request do
               subject
               similar_url.reload
             end.to_not change(related_url, :redirect_count)
+          end
+
+          it 'does not create redirect on similar url' do
+            expect { subject }.to_not change(similar_url.redirects, :count)
           end
         end
       end
@@ -82,6 +91,11 @@ RSpec.describe '/:id', type: :request do
             .from(0).to(1)
         end
 
+        it 'creates a redirect object related to given shortened_url' do
+          expect { subject }.to change(Redirect, :count).from(0).to(1)
+          expect(Redirect.last.shortened_url).to eq(related_url)
+        end
+
         context 'other urls present containing only different capitalisation' do
           let!(:similar_url) { create(:shortened_url) }
 
@@ -94,6 +108,10 @@ RSpec.describe '/:id', type: :request do
               subject
               similar_url.reload
             end.to_not change(related_url, :redirect_count)
+          end
+
+          it 'does not create redirect on similar url' do
+            expect { subject }.to_not change(similar_url.redirects, :count)
           end
         end
       end
