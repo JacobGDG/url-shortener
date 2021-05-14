@@ -4,6 +4,7 @@ class ShortenedUrl < ApplicationRecord
   after_initialize :init_uid
 
   belongs_to :user
+  has_many :redirects
 
   validates :uid, :original_url, presence: true
   validates :original_url,
